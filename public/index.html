@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <style>
+            body{
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background:url('../assets/game-preview.gif');
+                background-size: cover;
+            }
+
+            .container{
+                display: flex;
+                flex: 1;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .input{
+                border: 2px solid rebeccapurple;
+                border-radius: 5px;
+                background-color: rgba(0, 0, 0, 0.3);
+                padding: 20px;
+                margin-top: 10%;
+                width: 100%;
+                height:100%;
+                max-width: 500px;
+                max-height: 400px;
+            }
+            input{
+                width: 93%;
+                height: 60px;
+                margin-top: 0;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 0 20px;
+                background-color: rgba(0, 0, 0, 0.1);
+                font-size: 16px;
+                color: white;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+
+            button{
+                width: 100%;
+                height: 60px;
+                margin-top: 10px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 0 20px;
+                background-color: steelblue;
+                font-size: 16px;
+                color: white;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="input">
+                <input id="nome" placeholder="Seu nome...">
+                <button onclick="logar()">Entrar</button>
+            </div>
+        </div>
+        <script>
+
+            document.addEventListener('keydown', handleKeydown)
+
+            function handleKeydown(e){
+                const keyPressed = event.key
+
+                if(keyPressed == "Enter"){
+                    logar()
+                }
+            }
+
+            function logar(){
+                let nome = document.querySelector('#nome').value
+                if(!nome){
+                    alert("Digite um nome...")
+                }else{
+                    window.location.href = `game.html?name=${nome}`
+                }
+            }
+        </script>
+    </body>
+</html>
