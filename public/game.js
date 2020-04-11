@@ -9,27 +9,32 @@ export default function createGame() {
             height: 40
         },
         inteval: null,
-        frequency: 4000       
+        frequency: 4000,
+        status: 0       
     }
 
     const observers = []
 
     function start() {
         state.inteval = setInterval(addFruit, state.frequency)
+        notifyAll({type: 'start'})
     }
 
     function pause(){
         clearInterval(state.inteval)
+        notifyAll({type: 'pause'})
     }
 
     function start_crazy(){
         clearInterval(state.inteval)
         state.inteval = setInterval(addFruit, 1000)
+        notifyAll({type: 'crazy'})
     }
 
     function stop_crazy(){
         clearInterval(state.inteval)
         state.inteval = setInterval(addFruit, state.frequency)
+        notifyAll({type: 'ncrazy'})
     }
 
     function subscribe(observerFunction) {

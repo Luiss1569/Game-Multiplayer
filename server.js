@@ -21,7 +21,7 @@ sockets.on('connection', (socket) => {
     const {name,admin} = socket.handshake.query
     console.log(`> Player connected: ${playerId}`)
 
-    if(!admin){
+    if(!admin || game.state == 0){
         game.addPlayer({ playerId: playerId, name })
     }
 

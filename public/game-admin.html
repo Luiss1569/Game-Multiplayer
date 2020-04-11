@@ -76,10 +76,48 @@
                 color: #bdaa27;
             }
 
+            .go, .pause, .crazy{ 
+            width: 50px;
+            height: 10px;
+            padding: 15px;
+            margin-right: 30px;
+            margin-left: 20px;
+            border-radius: 6px
+        }
+
+        .go{
+            background-color: #04B404;
+            border: 2px solid #088A08; 
+            color: white
+        }
+
+        .pause{
+            background-color: #FF4000;
+            border: 2px solid #DF0101; 
+            color: white
+        }
+
+        .crazy {
+            height: auto;
+			background-color: #04B404;
+			border: 2px solid #088A08;
+			color: white;
+			margin-top: 10px
+		}
+
+        .invisible{
+            display: none
+        }
+
         </style>
         <script src="/socket.io/socket.io.js"></script>
     </head>
     <body>
+        <div class="Options">
+			<div class="go invisible">Go</div>
+			<div class="pause">Paused</div>
+			<div class="crazy invisible">Crazy Mode</div>
+		</div>
         <canvas id="screen" width="10" height="10"></canvas>
         <table id="score-table"></table>
         <br/>
@@ -135,6 +173,24 @@
             socket.on('disconnect', () => {
                 console.log('Unsubscribing All')
                 keyboardListener.unsubscribeAll();
+            })
+
+             socket.on('start', () => {
+                document.querySelector('.pause').classList.add('invisible')
+                document.querySelector('.go').classList.remove('invisible')
+            })
+
+             socket.on('pause', () => {
+                document.querySelector('.go').classList.add('invisible')
+                document.querySelector('.pause').classList.remove('invisible')
+            })
+
+             socket.on('crazy', () => {
+                document.querySelector('.crazy').classList.remove('invisible')
+            })
+
+            socket.on('ncrazy', () => {
+                document.querySelector('.crazy').classList.add('invisible')
             })
 
             socket.on('setup', (state) => {
