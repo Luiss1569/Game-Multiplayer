@@ -9,18 +9,27 @@ export default function createGame() {
             height: 40
         },
         inteval: null,
-        frequency: 5000       
+        frequency: 4000       
     }
 
     const observers = []
 
     function start() {
-
         state.inteval = setInterval(addFruit, state.frequency)
     }
 
     function pause(){
         clearInterval(state.inteval)
+    }
+
+    function start_crazy(){
+        clearInterval(state.inteval)
+        state.inteval = setInterval(addFruit, 1000)
+    }
+
+    function stop_crazy(){
+        clearInterval(state.inteval)
+        state.inteval = setInterval(addFruit, state.frequency)
     }
 
     function subscribe(observerFunction) {
@@ -35,6 +44,10 @@ export default function createGame() {
 
     function setState(newState) {
         Object.assign(state, newState)
+    }
+
+    function updateScore(players){
+        state.players = players
     }
 
     function addPlayer(command) {
@@ -151,6 +164,11 @@ export default function createGame() {
             const player = state.players[playerId]
             player.score = 0
         }
+
+        notifyAll({
+            type: 'reset',
+            command: state.players
+        })
     }
 
     return {
@@ -164,6 +182,9 @@ export default function createGame() {
         subscribe,
         start,
         pause,
-        resetPoints
+        resetPoints,
+        start_crazy,
+        stop_crazy,
+        updateScore
     }
 }

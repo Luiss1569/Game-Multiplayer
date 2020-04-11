@@ -129,6 +129,11 @@
                 keyboardListener.unsubscribeAll();
             })
 
+            socket.on('reset', (players) => {
+                const playerId = socket.id
+                game.updateScore(players)
+            })
+
             socket.on('setup', (state) => {
                 const playerId = socket.id
                 game.setState(state)

@@ -51,6 +51,14 @@ sockets.on('connection', (socket) => {
         game.resetPoints()
     })
 
+    socket.on('start-crazy', () => {
+        game.start_crazy()
+    })
+
+    socket.on('stop-crazy', () => {
+        game.stop_crazy()
+    })
+
 })
 
 server.listen(3000, () => {

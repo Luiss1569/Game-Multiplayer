@@ -88,6 +88,9 @@
         <button id="pause">Pause</button>
         <button id="reset">Reset</button>
 
+        <button id="crazy">Start Crazy Mode</button>
+        <button id="ncrazy">Stop Crazy Mode</button>
+
         <script type="module">
             import createGame from './game.js'
             import createKeyboardListener from './keyboard-listener.js'
@@ -178,6 +181,8 @@
             document.querySelector('#start').addEventListener('click', start_Game)
             document.querySelector('#pause').addEventListener('click', pause_Game)
             document.querySelector('#reset').addEventListener('click', reset_Game)
+            document.querySelector('#crazy').addEventListener('click', start_Crazy)
+            document.querySelector('#ncrazy').addEventListener('click', stop_Crazy)
 
             function start_Game(){
                 socket.emit('game-start', 'start')
@@ -189,6 +194,14 @@
 
             function reset_Game(){
                 socket.emit('game-reset', 'reset')
+            }
+
+            function start_Crazy(){
+                socket.emit('start-crazy', 'crazy')
+            }
+
+            function stop_Crazy(){
+                socket.emit('stop-crazy', 'stop')
             }
             
         </script>
